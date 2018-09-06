@@ -24,10 +24,11 @@ A trivial usage example:
 	import datetime
 	from aiohttp import web
 	import aiohttp_session
-	import uuid
+	from uuid import uuid4
 	import motor.motor_asyncio as motor_asyncio
 	import asyncio
 
+	
 	async def handler(request):
 		ss = await aiohttp_session.get_session(request)
 		ts = 'None' if ss.new else ss['last_visit'].strftime('%c')
@@ -54,4 +55,3 @@ A trivial usage example:
 
 	if __name__ == '__main__':
 		exit(main())
-
