@@ -21,3 +21,10 @@ A trivial usage example:
 
 .. code:: 
 
+import datetime
+from aiohttp import web
+import aiohttp_session
+import uuid
+import motor.motor_asyncio as motor_asyncio
+import asyncio
+
