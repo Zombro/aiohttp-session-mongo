@@ -20,6 +20,7 @@ Usage
 A trivial usage example:
 
 .. code:: 
+
 	import datetime
 	from aiohttp import web
 	import aiohttp_session
