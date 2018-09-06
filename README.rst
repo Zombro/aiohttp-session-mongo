@@ -19,7 +19,8 @@ Usage
 
 A trivial usage example:
 
-```python
+.. code:: python
+
 	import datetime
 	from aiohttp import web
 	import aiohttp_session
@@ -54,4 +55,3 @@ A trivial usage example:
 
 	if __name__ == '__main__':
 		exit(main())
-```
