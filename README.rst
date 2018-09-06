@@ -2,8 +2,7 @@ aiohttp_session_mongo2
 ===============
 
 Updated from:
-.. image:: https://codecov.io/github/alexpantyukhin/aiohttp-session-mongo/coverage.svg?branch=master
-    :target: https://codecov.io/github/alexpantyukhin/aiohttp-session-mongo
+https://github.com/alexpantyukhin/aiohttp-session-mongo
 By: 
 Zombro
 
