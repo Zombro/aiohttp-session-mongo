@@ -5,10 +5,6 @@ Updated from:
 
 https://github.com/alexpantyukhin/aiohttp-session-mongo
 
-By: 
-
-Zombro
-
 
 This library re-work provides mongo sessions store for `aiohttp.web`__.
 
@@ -21,6 +17,7 @@ https://github.com/aio-libs/aiohttp-session
 http://aiohttp-session.readthedocs.io/
 
 https://aiohttp.readthedocs.io/en/stable/
+
 
 
 Usage
