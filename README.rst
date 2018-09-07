@@ -12,6 +12,8 @@ This library re-work provides mongodb sessions store for `aiohttp.web`__.
 
 __ aiohttp_web_
 
+Relevant docs:
+
 https://github.com/aio-libs/aiohttp-session
 
 http://aiohttp-session.readthedocs.io/
