@@ -117,7 +117,7 @@ A trivial usage example:
 		try:
 			main()
 		except Exception as e:
-			with open('motor.death', 'w') as fh:
+			with open('app.death', 'w') as fh:
 				fh.write(repr(e))
 				raise Exception(e)
 				exit()
