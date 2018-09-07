@@ -21,6 +21,7 @@ A trivial usage example:
 
 .. code:: python
 
+
 	from datetime import datetime
 	from aiohttp import web
 	from aiohttp_session import AbstractStorage, Session, get_session, setup
