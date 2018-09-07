@@ -22,6 +22,8 @@ https://aiohttp.readthedocs.io/en/stable/
 
 If you use Spyder/IPython, extra fiddling will be required.
 
+** In Work. Incomplete **
+
 Usage
 -----
 
