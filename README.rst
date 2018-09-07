@@ -30,9 +30,8 @@ A trivial usage example:
 
 
 	class MotorStorage(AbstractStorage):
-		"""Simple Mongo storage.
-			The Client is given an HTTP cookie with a unique universal id (uuid).
-			Session data is stored server-side in a mongodb collection.
+		"""
+		Mongo/Motor storage, uuid cookie, single doc collection, TTL 10s demo.
 		"""
 		def __init__(self, sdc, *, cookie_name="AIOHTTP_SESSION",
 					 domain=None, max_age=None, path='/',
