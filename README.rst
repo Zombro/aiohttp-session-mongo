@@ -14,6 +14,11 @@ The library provides mongo sessions store for `aiohttp.web`__.
 
 __ aiohttp_web_
 
+https://github.com/aio-libs/aiohttp-session
+
+http://aiohttp-session.readthedocs.io/
+
+
 Usage
 -----
 
