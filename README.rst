@@ -6,7 +6,7 @@ Updated from:
 https://github.com/alexpantyukhin/aiohttp-session-mongo
 
 
-This library re-work provides mongo sessions store for `aiohttp.web`__.
+This library re-work provides mongodb sessions store for `aiohttp.web`__.
 
 .. _aiohttp_web: https://aiohttp.readthedocs.io/en/latest/web.html
 
