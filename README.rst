@@ -21,14 +21,53 @@ A trivial usage example:
 
 .. code:: python
 
-	import datetime
+	from datetime import datetime
 	from aiohttp import web
-	import aiohttp_session
+	from aiohttp_session import AbstractStorage, Session, get_session, setup
 	from uuid import uuid4
-	from aiohttp_session_mongo import MotorStorage
 	import motor.motor_asyncio as motor_asyncio
 	import asyncio
 
+
+	class MotorStorage(AbstractStorage):
+		"""Simple Mongo storage.
+			The Client is given an HTTP cookie with a unique universal id (uuid).
+			Session data is stored server-side in a mongodb collection.
+		"""
+		def __init__(self, sdc, *, cookie_name="AIOHTTP_SESSION",
+					 domain=None, max_age=None, path='/',
+					 secure=None, httponly=True):
+			super().__init__(cookie_name=cookie_name, domain=domain,
+							 max_age=max_age, path=path, secure=secure,
+							 httponly=httponly)
+			self._sdc = sdc
+
+		async def load_session(self, request):
+			cookie = self.load_cookie(request)
+			if cookie is None:
+				return Session(None, data=None, new=True)
+			else:
+				key = str(cookie)
+				data = await self._sdc.find_one({'_sid': key})
+				if data is None:
+					return Session(None, data=None, new=True)
+				return Session(key, data=data, new=False)
+
+		async def save_session(self, request, response, session):
+			sid = session.identity
+			key = str(sid) if sid else uuid4().hex
+			self.save_cookie(response, key)
+			sd = self._get_session_data(session)
+			db_entry = {'_sid': key,
+						'last_visit': sd['session']['last_visit'],
+						'created': sd['created'],
+						'session': sd['session']}
+			if await self._sdc.find_one({'_sid': key}):
+				rsp = await self._sdc.replace_one({'_sid': key}, db_entry)
+			else:
+				rsp = await self._sdc.insert_one(db_entry)
+			assert(rsp.acknowledged)
+			
 	
 	async def handler(request):
 		ss = await get_session(request)
