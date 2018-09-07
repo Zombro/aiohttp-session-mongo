@@ -25,7 +25,7 @@ A trivial usage example:
 	from aiohttp import web
 	import aiohttp_session
 	from uuid import uuid4
-	from aiohttp_session_mongo import MongoStorage
+	from aiohttp_session_mongo import MotorStorage
 	import motor.motor_asyncio as motor_asyncio
 	import asyncio
 
