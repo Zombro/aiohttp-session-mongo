@@ -1,4 +1,4 @@
-aiohttp_session_mongo2
+aiohttp_session_motor2
 ===============
 
 Updated from:
@@ -18,7 +18,7 @@ http://aiohttp-session.readthedocs.io/
 
 https://aiohttp.readthedocs.io/en/stable/
 
-
+If you use Spyder/IPython, extra fiddling will be required.
 
 Usage
 -----
