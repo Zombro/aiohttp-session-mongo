@@ -31,28 +31,49 @@ A trivial usage example:
 
 	
 	async def handler(request):
-		ss = await aiohttp_session.get_session(request)
+		ss = await get_session(request)
 		ts = 'None' if ss.new else ss['last_visit'].strftime('%c')
 		text = '{}: {}'.format('last visit', ts)
-		ss['last_visit'] = datetime.datetime.utcnow()
+		ss['last_visit'] = datetime.utcnow()
 		return web.Response(text=text)
 
 
-	async def make_app():
-		app = web.Application()
-		await client.sessions.sessions.create_index(
-				[("last_visit", 1)], expireAfterSeconds=30)
-		aiohttp_session.setup(app, MotorStorage())
-		app.router.add_get('/', handler)
-		return app
+	async def setup_motor(loop, app):
+		client = motor_asyncio.AsyncIOMotorClient('localhost', 27017, io_loop=loop)
+
+		async def close_motor():
+			client.close()
+		app.on_cleanup.append(close_motor)
+		sdc = await config_coll(client)
+		return sdc
+
+
+	async def config_coll(client):
+		sdc = client.sessions.sessions
+		index_names = []
+		async for i in sdc.list_indexes():
+			index_names.append(dict(i)['name'])
+		if 'last_visit_1' not in index_names:
+			await sdc.create_index(
+						[("last_visit", 1)], expireAfterSeconds=10)
+		return sdc
 
 
 	def main():
-		global client
-		client = motor_asyncio.AsyncIOMotorClient('127.0.0.1', 27017)
+		app = web.Application()
 		loop = asyncio.get_event_loop()
-		loop.run_until_complete(web.run_app(make_app()))
+		sdc = loop.run_until_complete(setup_motor(loop, app))
+		setup(app, MotorStorage(sdc))
+		app.router.add_get('/', handler)
+		web.run_app(app)
 
 
 	if __name__ == '__main__':
-		exit(main())
+		try:
+			main()
+		except Exception as e:
+			with open('motor.death', 'w') as fh:
+				fh.write(repr(e))
+				raise Exception(e)
+				exit()
+
