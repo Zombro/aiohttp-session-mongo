@@ -114,4 +114,3 @@ A trivial usage example:
 				fh.write(repr(e))
 				raise Exception(e)
 				exit()
-
