@@ -92,8 +92,8 @@ A trivial usage example:
 		async for i in sdc.list_indexes():
 			index_names.append(dict(i)['name'])
 		if 'last_visit_1' not in index_names:
-			await sdc.create_index(
-						[("last_visit", 1)], expireAfterSeconds=10)
+			await sdc.create_index([("last_visit", 1)],
+					       expireAfterSeconds=10)
 		return sdc
 
 
