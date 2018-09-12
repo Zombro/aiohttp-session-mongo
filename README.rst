@@ -27,7 +27,7 @@ If you use Spyder/IPython, extra fiddling will be required.
 Usage
 -----
 
-A trivial monolithic usage example:
+A trivial usage example:
 
 .. code:: python
 
